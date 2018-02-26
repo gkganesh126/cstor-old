@@ -29,6 +29,7 @@ before_script:
 script:
   - kubectl cluster-info
   - kubectl get deployment
+  - chmod +x ./buildscripts/travis-build.sh
   - ./buildscripts/travis-build.sh
 #  - ./ci/travis-ci.sh
 after_success:
