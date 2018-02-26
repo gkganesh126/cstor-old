@@ -9,7 +9,7 @@ language: go
 go:
   - 1.9.1
 install:
-#  - make bootstrap
+#  - make install
 before_script:
   # Download kubectl, which is a requirement for using minikube.
   - curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.7.0/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
@@ -21,7 +21,7 @@ before_script:
   # Wait for Kubernetes to be up and ready.
   - JSONPATH='{range .items[*]}{@.metadata.name}:{range @.status.conditions[*]}{@.type}={@.status};{end}{end}'; until kubectl get nodes -o jsonpath="$JSONPATH" 2>&1 | grep -q "Ready=True"; do sleep 1; done
   # Download and initialize helm.
-  - ./ci/ubuntu-compile-nsenter.sh && sudo cp .tmp/util-linux-2.30.2/nsenter /usr/bin
+#  - ./ci/ubuntu-compile-nsenter.sh && sudo cp .tmp/util-linux-2.30.2/nsenter /usr/bin
   - curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_helm.sh
   - chmod 700 get_helm.sh
   - ./get_helm.sh
